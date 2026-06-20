@@ -37,11 +37,11 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext";
 // import { ToastProvider } from "./hooks/useToast";
 
 import Layout from "./components/layout/Layout";
-// import ProtectedRoute from "./components/admin/ProtectedRoute";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 import HomePage from "./Pages/HomePage";
 import BlogsPage from "./Pages/BlogsPage";
@@ -51,50 +51,48 @@ import VideoDetailPage from "./Pages/VideoDetailPage";
 import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
 
-// import AdminLayout from "./Pages/admin/AdminLayout";
-// import AdminLoginPage from "./Pages/admin/AdminLoginPage";
-// import DashboardPage from "./Pages/admin/DashboardPage";
-// import BlogManagementPage from "./Pages/admin/BlogManagementPage";
-// import VideoManagementPage from "./Pages/admin/VideoManagementPage";
+import AdminLayout from "./Pages/admin/AdminLayout";
+import AdminLoginPage from "./Pages/admin/AdminLoginPage";
+import DashboardPage from "./Pages/admin/DashboardPage";
+import BlogManagementPage from "./Pages/admin/BlogManagementPage";
+import VideoManagementPage from "./Pages/admin/VideoManagementPage";
 
 export default function App() {
   return (
-    // <AuthProvider>
-    //   <ToastProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* Public */}
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/blogs" element={<BlogsPage />} />
-              <Route path="/blogs/:slug" element={<BlogDetailPage />} />
-              <Route path="/videos" element={<VideosPage />} />
-              <Route path="/videos/:id" element={<VideoDetailPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Route>
+    <AuthProvider>
+      {/* <ToastProvider> */}
+      <BrowserRouter>
+        <Routes>
+          {/* Public */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+            <Route path="/videos" element={<VideosPage />} />
+            <Route path="/videos/:id" element={<VideoDetailPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Route>
 
-            {/* Admin Login
-            <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
 
-            {/* Admin *
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<DashboardPage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<DashboardPage />} />
 
-              <Route path="blogs" element={<BlogManagementPage />} />
+            <Route path="blogs" element={<BlogManagementPage />} />
 
-              <Route path="videos" element={<VideoManagementPage />} />
-            </Route> */}
-          </Routes>
-        </BrowserRouter>
-    //   </ToastProvider>
-    // </AuthProvider>
+            <Route path="videos" element={<VideoManagementPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* </ToastProvider> */}
+    </AuthProvider>
   );
 }

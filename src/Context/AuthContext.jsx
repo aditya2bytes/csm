@@ -1,3 +1,5 @@
+// /* eslint-disable react-refresh/only-export-components */
+
 // import { createContext, useContext, useState } from "react";
 
 // const AuthContext = createContext();
@@ -32,4 +34,50 @@
 //   return useContext(AuthContext);
 // }
 
-//Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components
+/* eslint-disable react-refresh/only-export-components */
+
+import { createContext, useContext, useState } from "react";
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+
+  const login = (username, password) => {
+    if (username === "admin" && password === "123") {
+      const admin = {
+        name: "Admin",
+      };
+
+      setUser(admin);
+      localStorage.setItem("user", JSON.stringify(admin));
+
+      return true;
+    }
+
+    return false;
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
